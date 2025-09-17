@@ -1,0 +1,6 @@
+*.love
+.husky/
+node_modules/
+package.json
+commitlint.config.js
+yarn.lock
