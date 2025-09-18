@@ -17,8 +17,8 @@ function AudioManager:addSound(soundName, path)
 		if success then
 			self.sounds[soundName] = sound
 		else
-			print("Помилка завантаження звуку: " .. path)
-			print(sound)
+			Game.debug:error("Error load sound: " .. path)
+			Game.debug:info(sound)
 			return nil
 		end
 	end
@@ -32,8 +32,8 @@ function AudioManager:addMusic(musicName, path)
 			self.musics[musicName] = music
 			self.musics[musicName]:setLooping(true)
 		else
-			print("Помилка завантаження музики: " .. path)
-			print(music)
+			Game.debug:error("Error load music: " .. path)
+			Game.debug:info(music)
 			return nil
 		end
 	end
@@ -47,7 +47,7 @@ function AudioManager:playSound(soundName)
 		sound:play()
 		return sound
 	else
-		print("Немає такого звуку: " .. tostring(soundName))
+		Game.debug:error("There is no such sound: " .. tostring(soundName))
 		return nil
 	end
 end
@@ -63,7 +63,7 @@ function AudioManager:playMusic(musicName)
 		self.currentMusic:play()
 		return self.currentMusic
 	else
-		print("Немає такої музики: " .. tostring(musicName))
+		Game.debug:error("There is no such music: " .. tostring(musicName))
 		return nil
 	end
 end
