@@ -22,18 +22,19 @@ function love.load()
 	})
 
 	Game.debug.info("Loading fonts...")
-	Game.fontManager:load("shojumaru", "assets/fonts/Shojumaru/Shojumaru-Regular.ttf", 14)
+	Game.fontManager:load("shojumaru", "assets/fonts/Shojumaru/Shojumaru-Regular.ttf", 18)
 	Game.fontManager:set("shojumaru")
 
 	Game.debug.info("Loading audio...")
 	Game.audioManager:addMusic("menu_theme", "assets/musics/nice people.mp3")
 	-- Game.audioManager:addMusic("game_theme", "assets/musics/game.mp3")
-	Game.audioManager:setMusicVolume(0.1)
+	Game.audioManager:setMusicVolume(Game.config.audio.musicVolume)
+	Game.audioManager:playMusic("menu_theme")
 
 	Game.debug.info("Registration scene 'menu'...")
 	Game.sceneManager:register("menu", require("src.scenes.MenuScene"))
+	Game.sceneManager:register("settings", require("src.scenes.SettingsScene"))
 	-- Game.sceneManager:register("game", require("src.scenes.GameScene"))
-	-- Game.sceneManager:register("settings", require("src.scenes.SettingsScene"))
 	-- Game.sceneManager:register("pause", require("src.scenes.PauseScene"))
 
 	Game.sceneManager:switchTo("menu")
