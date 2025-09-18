@@ -34,7 +34,7 @@ function Scene:draw()
 	-- Virtual method override in other classes
 end
 
--- Базові обробники подій Love2D
+-- Basic event handlers Love2D
 function Scene:keypressed(key, scancode, isrepeat) end
 function Scene:keyreleased(key, scancode) end
 function Scene:textinput(text) end
