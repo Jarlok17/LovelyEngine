@@ -5,6 +5,7 @@ FontManager.__index = FontManager
 function FontManager.new()
 	local self = setmetatable({}, FontManager)
 	self.fonts = {}
+	self.currentFont = nil
 	return self
 end
 
@@ -22,6 +23,10 @@ function FontManager:load(fontName, path, size)
 	return self.fonts[fontName]
 end
 
+function FontManager:getCurrentFont()
+	return self.currentFont
+end
+
 function FontManager:get(fontName)
 	return self.fonts[fontName]
 end
@@ -30,6 +35,7 @@ function FontManager:set(fontName)
 	local font = self:get(fontName)
 	if font then
 		love.graphics.setFont(font)
+		self.currentFont = font
 		return true
 	end
 	return false
