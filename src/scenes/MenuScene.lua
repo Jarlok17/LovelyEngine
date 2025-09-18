@@ -20,7 +20,7 @@ function MenuScene:enter(transitionData)
 	local width, height = love.graphics.getDimensions()
 
 	self.menu:setBackgroundColor(0.15, 0.15, 0.6)
-	Game.audioManager:playMusic("menu_theme")
+	-- Game.audioManager:playMusic("menu_theme")
 
 	local buttonWidth = 200
 	local buttonHeight = 60
