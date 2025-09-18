@@ -12,8 +12,8 @@ local Config = {
 		vsync = true,
 	},
 	audio = {
-		musicVolume = 0.7,
-		soundVolume = 0.8,
+		musicVolume = 1.0,
+		soundVolume = 1.0,
 	},
 	graphics = {
 		scale = 1,
