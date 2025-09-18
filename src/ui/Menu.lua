@@ -1,5 +1,6 @@
 -- src/ui/Menu
 local Button = require("src.ui.Button")
+local Slider = require("src.ui.Slider")
 
 local Menu = {}
 Menu.__index = Menu
@@ -7,6 +8,7 @@ Menu.__index = Menu
 function Menu.new()
 	local self = setmetatable({}, Menu)
 	self.buttons = {}
+	self.sliders = {}
 	self.isVisible = true
 	self.background_color = { 0.1, 0.1, 0.1, 1.0 }
 	self.background_image = nil
@@ -22,6 +24,17 @@ function Menu:createButton(x, y, width, height, text)
 	local button = Button.new(x, y, width, height, text)
 	table.insert(self.buttons, button)
 	return button
+end
+
+function Menu:addSlider(slider)
+	table.insert(self.sliders, slider)
+	return slider
+end
+
+function Menu:createSlider(x, y, width, height, min, max, initialValue, onChangeCallback)
+	local slider = Slider.new(x, y, width, height, min, max, initialValue, onChangeCallback)
+	table.insert(self.sliders, slider)
+	return slider
 end
 
 function Menu:setBackgroundColor(r, g, b, a)
@@ -48,6 +61,10 @@ function Menu:update(dt)
 	for _, button in ipairs(self.buttons) do
 		button:update(dt)
 	end
+
+	for _, slider in ipairs(self.sliders) do
+		slider:update(dt)
+	end
 end
 
 function Menu:draw()
@@ -70,6 +87,10 @@ function Menu:draw()
 		love.graphics.setColor(1, 1, 1, 1)
 	end
 
+	for _, slider in ipairs(self.sliders) do
+		slider:draw()
+	end
+
 	for _, button in ipairs(self.buttons) do
 		button:draw()
 	end
@@ -83,6 +104,10 @@ function Menu:mousemoved(x, y)
 	for _, button in ipairs(self.buttons) do
 		button:mousemoved(x, y)
 	end
+
+	for _, slider in ipairs(self.sliders) do
+		slider:mousemoved(x, y)
+	end
 end
 
 function Menu:mousepressed(x, y, button)
@@ -95,6 +120,13 @@ function Menu:mousepressed(x, y, button)
 			return true
 		end
 	end
+
+	for _, s in ipairs(self.sliders) do
+		if s:mousepressed(x, y, button) then
+			return true
+		end
+	end
+
 	return false
 end
 
@@ -108,11 +140,19 @@ function Menu:mousereleased(x, y, button)
 			return true
 		end
 	end
+
+	for _, s in ipairs(self.sliders) do
+		if s:mousereleased(x, y, button) then
+			return true
+		end
+	end
+
 	return false
 end
 
 function Menu:clear()
 	self.buttons = {}
+	self.sliders = {}
 end
 
 return Menu
